@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ym.intent">
 
+    <uses-permission android:name="android.permission.CALL_PHONE">
+    </uses-permission>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,17 +14,19 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AppActivity" />
         <activity android:name=".App2Acitivity" />
-        <activity android:name=".SenderActivity">
+        <activity android:name=".SenderActivity"></activity>
+        <activity android:name=".ReceiverActivity" />
+        <activity android:name=".PassingFromActivity">
 
         </activity>
-        <activity android:name=".ReceiverActivity" />
-        <activity android:name=".PassingFromActivity" >
+        <activity android:name=".PassingToAcitivity" />
+        <activity android:name=".ImplicitIntentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> </activity>
-        <activity android:name=".PassingToAcitivity"></activity>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
