@@ -6,48 +6,51 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context="com.dsdm.yuuuuunmi.calculator.MainActivity">
+    tools:context="com.dsdm.yuuuuunmi.calculator.Calculator1Activity">
 
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:ems="20"
-            android:gravity="right"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
-
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/btn_null"
+            <TextView
+                android:id="@+id/txt_oper1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="2"
-                android:background="@color/hwColorUnClick"
-                android:textColor="#ffffff"
-                android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/btn_delete"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@color/hwColorUnClick"
-                android:text="DELETE"
+                android:gravity="center"
                 android:textColor="#ffffff"
-                android:textSize="13sp" />
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_oper2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@color/hwColorUnClick"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
         </TableRow>
+
+        <TextView
+            android:id="@+id/txt_result"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:ems="20"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
 
         <TableRow
             android:layout_width="match_parent"
@@ -67,7 +70,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/bnt8"
+                android:id="@+id/btn8"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -122,7 +125,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/bnt5"
+                android:id="@+id/btn5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -177,7 +180,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/bnt2"
+                android:id="@+id/btn2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -232,7 +235,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/bnt0"
+                android:id="@+id/btn0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -244,15 +247,15 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btnResult"
+                android:id="@+id/btnEnter"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@color/hwColorUnClick"
-                android:text="="
-                android:textColor="#ffffff"
-                android:textSize="40sp"
+                android:text="☞"
+                android:textColor="#ffff00"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <Button

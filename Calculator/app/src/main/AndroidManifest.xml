@@ -15,6 +15,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Calculator1Activity"
+            android:label="Calculator 01">
+            <intent-filter>
+                <action android:name="com.dsdm.yuuuuunmi.calculator.cal"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Calculator2Activity"
+            android:label="Calculator 02">
+            <intent-filter>
+                <action android:name="com.dsdm.yuuuuunmi.calculator.cal"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

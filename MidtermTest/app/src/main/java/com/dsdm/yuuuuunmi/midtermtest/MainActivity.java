@@ -7,6 +7,7 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         iv_pinewheel.setOnLongClickListener(this);
 
     }
+
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
