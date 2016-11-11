@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <Button android:id="@+id/opr1"
+        android:cursorVisible="true"
+        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:background="@drawable/border"
+        android:padding="5pt"
+        android:layout_marginLeft="30pt"
+        android:layout_marginTop="20pt"
+        android:text=" Calculator 1 "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="13pt" />
+
+    <Button android:id="@+id/opr2"
+        android:cursorVisible="true"
+        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:background="@drawable/border"
+        android:padding="5pt"
+        android:layout_marginLeft="30pt"
+        android:text=" Calculator 2 "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="13pt" />
+
+    <Button android:id="@+id/oprX"
+        android:cursorVisible="true"
+        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:background="@drawable/border"
+        android:padding="5pt"
+        android:layout_marginLeft="30pt"
+        android:text=" Calculator X "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="13pt" />
+
+    <TextView android:id="@+id/res"
+        android:cursorVisible="true"
+        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:background="@drawable/border"
+        android:padding="5pt"
+        android:layout_marginLeft="30pt"
+        android:layout_marginTop="20pt"
+        android:text="Result:            "
+        android:textColor="#000000"
+        android:textSize="15pt" />
+
+</LinearLayout>
