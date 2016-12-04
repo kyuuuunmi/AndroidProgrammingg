@@ -59,7 +59,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
                 for (Long i = 0L; i < 3L; i++) {
                     Thread.sleep(2000);
-                    publishProgress((Long) i, i+1);
+                    publishProgress((Long) i, i+1, i+2);
 
                 }
             }catch (InterruptedException e){
@@ -70,7 +70,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
         protected  void onProgressUpdate(Long... value){
             super.onProgressUpdate(value);
 
-            txtMsg.append("\nworking..."+ value[0] + " " + value[1]);
+            txtMsg.append("\nworking..."+ value[0] + " " + value[1] + value[2]);
 
 
         }
