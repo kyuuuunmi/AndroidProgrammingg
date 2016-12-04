@@ -1,65 +1,125 @@
 package com.example.ym.database;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MovieActivity extends AppCompatActivity {
 
-    private ListView myListView;
-    DBHelper mydb;
-    ArrayAdapter mAdapter;
+
+    private DBHelper mydb;
+    TextView name;
+    TextView director;
+    TextView year;
+    TextView nation;
+    TextView rating;
+    int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+        name = (TextView) findViewById(R.id.edit_mvName);
+        director = (TextView) findViewById(R.id.edit_mvDirector);
+        year = (TextView) findViewById(R.id.edit_mvYear);
+        nation = (TextView) findViewById(R.id.edit_mvNation);
+        rating = (TextView) findViewById(R.id.edit_mvRating);
 
         mydb = new DBHelper(this);
-        ArrayList array_list = mydb.getAllMovies();
 
-        mAdapter =
-                new ArrayAdapter(this, android.R.layout.simple_list_item_1, array_list);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int Value = extras.getInt("id");
+            if (Value > 0) {
+                Cursor rs = mydb.getData(Value);
+                id = Value;
+                rs.moveToFirst();
+                String n = rs.getString(rs.getColumnIndex(DBHelper.MOVIES_COLUMN_NAME));
+                String d = rs.getString(rs.getColumnIndex(DBHelper.MOVIES_COLUMN_DIRECTOR));
+                String y = rs.getString(rs.getColumnIndex(DBHelper.MOVIES_COLUMN_YEAR));
+                String na = rs.getString(rs.getColumnIndex(DBHelper.MOVIES_COLUMN_NATION));
+                String r = rs.getString(rs.getColumnIndex(DBHelper.MOVIES_COLUMN_RATING));
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                Button b = (Button) findViewById(R.id.btn_save);
+                b.setVisibility(View.INVISIBLE);
+                name.setText((CharSequence) n);
+                director.setText((CharSequence) d);
+                year.setText((CharSequence) y);
+                nation.setText((CharSequence) na);
+                rating.setText((CharSequence) r);
 
-        myListView = (ListView) findViewById(R.id.listView1);
-        myListView.setAdapter(mAdapter);
-
-        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                int id = arg2 + 1;
-                Bundle dataBundle = new Bundle();
-                dataBundle.putInt("id", id);
-                Intent intent = new Intent(getApplicationContext(), kr.co.company.moviedatabase.DisplayMovie.class);
-                intent.putExtras(dataBundle);
-                startActivity(intent);
             }
-        });
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAdapter.clear();
-        mAdapter.addAll(mydb.getAllMovies());
-        mAdapter.notifyDataSetChanged();
+        }
     }
 
-    public void onClick(View target) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", 0);
-        Intent intent = new Intent(getApplicationContext(), kr.co.company.moviedatabase.DisplayMovie.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+    public void insert(View view) {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int Value = extras.getInt("id");
+            if (Value > 0) {
+                if (mydb.updateMovie(id, name.getText().toString(), director.getText().toString(), year.getText().toString(), nation.getText().toString(), rating.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), com.example.ym.database.DisplayMovieActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
+                }
+
+            }else {
+                if (mydb.insertMovie(name.getText().toString(), director.getText().toString(), year.getText().toString(), nation.getText().toString(), rating.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "추가되었음", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), com.example.ym.database.DisplayMovieActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "추가되지 않았음", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+
+            }
+        }
     }
 
+    public void delete(View view) {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int Value = extras.getInt("id");
+            if (Value > 0) {
+                mydb.deleteMovie(id);
+                Toast.makeText(getApplicationContext(), "삭제되었음", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "삭제되지 않았음", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public void edit(View view){
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            int value = extras.getInt("id");
+            if(value>0){
+                if(mydb.updateMovie(id, name.getText().toString(),director.getText().toString(), year.getText().toString(), nation.getText().toString(), rating.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
 
 }
 

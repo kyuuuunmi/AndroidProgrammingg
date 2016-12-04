@@ -3,6 +3,7 @@ package com.example.ym.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -13,9 +14,7 @@ import java.util.ArrayList;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    /*private  static final String DATABASE_NAME = "mycontacts.db";
-    private  static final int DATABASE_VERSION = 2;
-    */
+
     public static final String DATABASE_NAME = "MyMovies.db";
     public static final String MOVIES_TABLE_NAME = "movies";
     public static final String MOVIES_COLUMN_ID = "id";
@@ -32,7 +31,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("CREATE TABLE contact ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT, tel TEXT);");
         db.execSQL(
                 "create table movies " +
                         "(id integer primary key,name text, director text, year text, nation text, rating text)"
@@ -43,10 +41,36 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        //    db.execSQL("DROP TABLE IF EXISTS contact");
         db.execSQL("DROP TABLE IF EXISTS movies");
         onCreate(db);
     }
+
+    public boolean insertMovie(String name, String director, String year, String nation, String rating) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("name", name);
+        contentValues.put("director", director);
+        contentValues.put("year", year);
+        contentValues.put("nation", nation);
+        contentValues.put("rating", rating);
+
+        db.insert("movies", null, contentValues);
+        return true;
+    }
+
+    public Cursor getData(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from movies where id =" + id + "", null);
+        return res;
+    }
+
+    public int numberOfRows() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, MOVIES_TABLE_NAME);
+        return numRows;
+    }
+
 
     public boolean updateMovie(Integer id, String name, String director, String year, String nation, String rating) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -73,10 +97,10 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from movies", null);
         res.moveToFirst();
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(res.getColumnIndex(MOVIES_COLUMN_NAME)));
+            array_list.add(res.getString(res.getColumnIndex(MOVIES_COLUMN_ID))
+                    + " " + res.getString(res.getColumnIndex(MOVIES_COLUMN_NAME)));
             res.moveToNext();
         }
         return array_list;
-
     }
 }

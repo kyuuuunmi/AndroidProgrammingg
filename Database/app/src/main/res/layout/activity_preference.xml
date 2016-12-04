@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >-->
-    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content">
 
@@ -27,6 +22,5 @@
             android:key="edit"
             android:summary="음량을 선택하시오"
             android:title="음량선택" />
-    </PreferenceScreen>
-<!--
-</LinearLayout>-->
+
+</PreferenceScreen>

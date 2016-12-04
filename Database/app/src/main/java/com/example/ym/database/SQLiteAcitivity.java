@@ -7,10 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SQLiteAcitivity extends AppCompatActivity {
 
-    DBHelper helper;
+    DBHelper1 helper;
     SQLiteDatabase db;
     EditText edit_name, edit_tel;
 
@@ -19,37 +20,33 @@ public class SQLiteAcitivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sqlite);
 
-        helper = new DBHelper(this);
+        helper = new DBHelper1(this);
         try {
             db = helper.getWritableDatabase();
-        }catch (SQLiteException ex){
+        } catch (SQLiteException ex) {
             db = helper.getReadableDatabase();
         }
 
-        edit_name = (EditText)findViewById(R.id.edit_name);
-        edit_tel = (EditText)findViewById(R.id.edit_tel);
+        edit_name = (EditText) findViewById(R.id.edit_name);
+        edit_tel = (EditText) findViewById(R.id.edit_tel);
+    }
 
-        findViewById(R.id.btn_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = edit_name.getText().toString();
-                String tel = edit_tel.getText().toString();
-                db.execSQL("INSERT INTO contact VALUES (null, '" + name + "', '" + tel + "');");
-            }
-        });
+    public void insert(View target){
+        String name = edit_name.getText().toString();
+        String tel = edit_tel.getText().toString();
+        db.execSQL("INSERT INTO contacts VALUES (null, '" + name + "', '" + tel + "');");
+        Toast.makeText(getApplicationContext(), "성공적으로 추가되었음", Toast.LENGTH_SHORT).show();
+        edit_name.setText("");
+        edit_tel.setText("");
+    }
 
-        findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = edit_name.getText().toString();
-                Cursor cursor;
-                cursor = db.rawQuery("SELECT name, tel FROM contact WHERE name='" + name + "';", null);
-                while(cursor.moveToNext()){
-                    String tel = cursor.getString(1);
-                    edit_tel.setText(tel);
-                }
-            }
-        });
-
+    public void search(View target){
+        String name = edit_name.getText().toString();
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT name, tel FROM contacts WHERE name='" + name + "';", null);
+        while (cursor.moveToNext()) {
+            String tel = cursor.getString(1);
+            edit_tel.setText(tel);
+        }
     }
 }
